@@ -28,7 +28,6 @@ bool hasKeyPressed()
 			keypress = false;
 			break;
 		default:
-			keypress = false;
 			break;
 		}
 	}

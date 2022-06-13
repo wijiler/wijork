@@ -35,6 +35,7 @@ int main (int argc, char **argv)
     SDL_Event event;
     while(running) 
     {
+	hasKeyPressed();
         while(SDL_PollEvent(&event))
         {
             if(event.type == SDL_QUIT)
@@ -46,7 +47,9 @@ int main (int argc, char **argv)
 //  SDL_RenderCopy(renderer, texture, NULL, NULL);
   drawImage(funnyman,renderer,0,12,100,100);
   drawEntity(player,renderer,100,100);
-  switch(getKeyPressed()) {
+  if(hasKeyPressed() == true) { getKeyPressed(); }
+int key = getKeyPressed();
+  switch(key) {
         case SDLK_w:
             player.posy += 1 * speed;
             break;
