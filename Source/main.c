@@ -1,6 +1,5 @@
 #include"global.h"
 #include"tools/entity.h"
-#include"tools/input.c"
 static const int width = 800;
 static const int height = 600;
 int main (int argc, char **argv)
@@ -35,7 +34,6 @@ int main (int argc, char **argv)
     SDL_Event event;
     while(running) 
     {
-	hasKeyPressed();
         while(SDL_PollEvent(&event))
         {
             if(event.type == SDL_QUIT)
@@ -46,28 +44,13 @@ int main (int argc, char **argv)
     SDL_RenderClear(renderer);
 //  SDL_RenderCopy(renderer, texture, NULL, NULL);
   drawImage(funnyman,renderer,0,12,100,100);
-  drawEntity(player,renderer,100,100);
-  if(hasKeyPressed() == true) { getKeyPressed(); }
-int key = getKeyPressed();
-  switch(key) {
-        case SDLK_w:
-            player.posy += 1 * speed;
-            break;
-        case SDLK_s:
-            player.posy -= 1 * speed;
-            break;
-        case SDLK_d:
-            player.posx += 1 * speed;
-            break;
-        case SDLK_a:
-            player.posx -= 1 * speed;
-            break;
-        case SDLK_q:
-            running = false;
-        default:
-            break;
+  const Uint8* state = SDL_GetKeyboardState(NULL);
+	  if( state[SDL_SCANCODE_W]) {
+		  player.posy += 1 * speed;
     }
- 
+   else if( state[SDL_SCANCODE_Q] ) {
+   }
+  drawEntity(player,renderer,100,100);
        SDL_RenderPresent(renderer);
 
     }
