@@ -44,11 +44,21 @@ int main (int argc, char **argv)
     SDL_RenderClear(renderer);
 //  SDL_RenderCopy(renderer, texture, NULL, NULL);
   drawImage(funnyman,renderer,0,12,100,100);
-  const Uint8* state = SDL_GetKeyboardState(NULL);
+    const Uint8* state = SDL_GetKeyboardState(NULL);
 	  if( state[SDL_SCANCODE_W]) {
-		  player.posy += 1 * speed;
+		  player.posy += 1 * speed / 2;
     }
    else if( state[SDL_SCANCODE_Q] ) {
+	   running = false;
+   }
+   else if ( state[SDL_SCANCODE_S] ) {
+	   player.posy -= 1 * speed;
+   }
+   else if ( state[SDL_SCANCODE_A] ) {
+	   player.posx -= 1 * speed / 2;
+   }
+   else if ( state[SDL_SCANCODE_D] ) {
+	   player.posx += 1 * speed;
    }
   drawEntity(player,renderer,100,100);
        SDL_RenderPresent(renderer);
