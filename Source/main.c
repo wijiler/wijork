@@ -1,5 +1,6 @@
 #include"global.h"
 #include"tools/entity.h"
+#include"tools/audio/audio.h"
 static const int width = 800;
 static const int height = 600;
 int main (int argc, char **argv)
@@ -64,6 +65,12 @@ int main (int argc, char **argv)
    else if ( state[SDL_SCANCODE_D] ) {
 	   player.posx += 1 + speed;
    }   
+   else if ( state[SDL_SCANCODE_SPACE] ) {
+	   player.posy += 3;
+   }
+   else if ( state[SDL_SCANCODE_P] ) {
+	   playsound("funny.mp3");
+   }
 
   drawEntity(player,renderer);
        SDL_RenderPresent(renderer);

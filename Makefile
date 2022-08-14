@@ -10,6 +10,7 @@ build:
 		-lSDL2 \
 		-lSDL2_image \
 		-lpthread \
+		-lm \
 		-ldl
 clean:
 	rm -f $(B_DIR)/*
