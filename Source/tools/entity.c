@@ -7,5 +7,5 @@ SDL_Texture * sprite;
 } entity2D;
 void drawEntity ( entity2D entity,SDL_Renderer * rend,int spritewidth,int spriteheight) 
 {
-drawImage(entity.sprite,rend,entity.posx,entity.posy,spritewidth,spriteheight);
+drawImage(entity.sprite,rend,entity.posx,entity.posy * -1,spritewidth,spriteheight);
 }

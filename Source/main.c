@@ -24,10 +24,10 @@ int main (int argc, char **argv)
     SDL_Surface * funnyman_surface = loadImage("funnyman.png");
     SDL_Texture * funnyman = createImageTexture(funnyman_surface,renderer);
     entity2D player;
-    player.posx = 33;
+    player.posx = 0;
     player.posy = 0;
     player.sprite = funnyman;
-    int speed = 100;
+    int speed = 1;
     
     // loop 
     bool running = true;
@@ -46,19 +46,19 @@ int main (int argc, char **argv)
   drawImage(funnyman,renderer,0,12,100,100);
     const Uint8* state = SDL_GetKeyboardState(NULL);
 	  if( state[SDL_SCANCODE_W]) {
-		  player.posy += 1 * speed / 2;
+		  player.posy += 1 + speed;
     }
    else if( state[SDL_SCANCODE_Q] ) {
 	   running = false;
    }
    else if ( state[SDL_SCANCODE_S] ) {
-	   player.posy -= 1 * speed;
+	   player.posy -= 1 + speed;
    }
    else if ( state[SDL_SCANCODE_A] ) {
-	   player.posx -= 1 * speed / 2;
+	   player.posx -= 1 + speed;
    }
    else if ( state[SDL_SCANCODE_D] ) {
-	   player.posx += 1 * speed;
+	   player.posx += 1 + speed;
    }
   drawEntity(player,renderer,100,100);
        SDL_RenderPresent(renderer);
