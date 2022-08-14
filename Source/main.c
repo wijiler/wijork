@@ -1,5 +1,5 @@
 #include"global.h"
-#include"tools/physics/gravity.h"
+#include"tools/entity.h"
 static const int width = 800;
 static const int height = 600;
 int main (int argc, char **argv)
@@ -44,24 +44,27 @@ int main (int argc, char **argv)
         }   
     SDL_RenderClear(renderer);
 //  SDL_RenderCopy(renderer, texture, NULL, NULL);
-  applyGravity(player,19,true);
   drawImage(funnyman,renderer,0,12,100,100);
     const Uint8* state = SDL_GetKeyboardState(NULL);
-	  if( state[SDL_SCANCODE_W]) {
-		  player.posy += 1 + speed;
+    player.posy -= 0.5f;
+    /*	  if( state[SDL_SCANCODE_W]) {
+		  player.posy += gravity(10.0f,-9.8,true) + speed;
     }
-   else if( state[SDL_SCANCODE_Q] ) {
+    */
+   if( state[SDL_SCANCODE_Q] ) {
 	   running = false;
    }
-   else if ( state[SDL_SCANCODE_S] ) {
+ /*  else if ( state[SDL_SCANCODE_S] ) {
 	   player.posy -= 1 + speed;
    }
+*/
    else if ( state[SDL_SCANCODE_A] ) {
 	   player.posx -= 1 + speed;
    }
    else if ( state[SDL_SCANCODE_D] ) {
 	   player.posx += 1 + speed;
-   }
+   }   
+
   drawEntity(player,renderer);
        SDL_RenderPresent(renderer);
 
