@@ -9,8 +9,6 @@ build:
 		$(S_DIR)/main.c \
 		-lSDL2 \
 		-lSDL2_image \
-		-lpthread \
-		-lm \
 		-ldl
 clean:
 	rm -f $(B_DIR)/*

@@ -69,7 +69,6 @@ int main (int argc, char **argv)
 	   player.posy += 3;
    }
    else if ( state[SDL_SCANCODE_P] ) {
-	   playsound("funny.mp3");
    }
 
   drawEntity(player,renderer);
