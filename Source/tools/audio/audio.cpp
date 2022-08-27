@@ -5,10 +5,12 @@
 #include<future>
 #include<chrono>
 //#include<irrKlang.h>
+#include<unistd.h>
 using namespace std;
 using namespace irrklang;
 ISoundEngine* engine = createIrrKlangDevice();
 void AUDIO_play (const char* file,bool looping) {
+	usleep(68000);
 	if (!engine) {
 	   printf("Audio -> FATAL : could not init audio engine");
 	   EXIT_FAILURE;
