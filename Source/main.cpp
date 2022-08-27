@@ -1,17 +1,18 @@
 #include"global.h"
 #include"tools/entity.h"
 #include"tools/audio/audio.h"
+#include"tools/window.h"
 static const int width = 800;
 static const int height = 600;
 int main (int argc, char **argv)
 {
-    SDL_Init(SDL_INIT_VIDEO);
+    /*SDL_Init(SDL_INIT_VIDEO);
     int init = IMG_Init(IMG_INIT_PNG);
     if((init & IMG_INIT_PNG) != IMG_INIT_PNG) {
         printf("Couldnt load images :P");
-    }   
+    }*/   
     // Create the window
-    SDL_Window *window = SDL_CreateWindow("Ferengine",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,width,height,SDL_WINDOW_SHOWN);
+    SDL_Window *window = createwindow("example",width,height,true);
     // renderer
     SDL_Renderer *renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);    
 //  SDL_Surface * image = IMG_Load("funnyman.png");
