@@ -9,7 +9,6 @@ build:
 		$(S_DIR)/main.cpp \
 		-lSDL2 \
 		-lSDL2_image \
-		-lbass \
 		-ldl
 clean:
 	rm -f $(B_DIR)/*

@@ -69,6 +69,7 @@ int main (int argc, char **argv)
 	   player.posy += 3;
    }
    else if ( state[SDL_SCANCODE_P] ) {
+	   PlayAudio("funnyman.mp3",false);
    }
 
   drawEntity(player,renderer);
@@ -77,6 +78,7 @@ int main (int argc, char **argv)
     }
     // release resources
     IMG_Quit();
+    AUDIO_DISPOSE();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
