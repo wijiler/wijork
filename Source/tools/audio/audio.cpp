@@ -1,10 +1,10 @@
 #include"../../global.h"
-#include"../../../irrklang/include/irrKlang.h" // I dont have to do this but I like the autocorrect (will change to <irrKlang.h> when finished)
+//#include"../../../irrklang/include/irrKlang.h" // I dont have to do this but I like the autocorrect (will change to <irrKlang.h> when finished)
 //multithreading
 #include<thread>
 #include<future>
 #include<chrono>
-//#include<irrKlang.h>
+#include<irrKlang.h>
 #include<unistd.h>
 using namespace std;
 using namespace irrklang;
