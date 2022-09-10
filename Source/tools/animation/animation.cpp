@@ -1,36 +1,29 @@
-#include"../../global.h"
-#include"unistd.h"
-#include<thread>
-#include<future>
-#include<chrono>
-
+#include"../../global.h"	
+#include"../entity.h"
+#include<bits/stdc++.h>
 using namespace std;
-string state;
-class animation {
-	public:
-		string activation_state;
-		vector<SDL_Surface*> frames;		
-		int frame;
-	 void animate ();	
-	 bool checkState () {
-		while (true) {
-		usleep(12000);
-		if (state == this->activation_state)
-		{
-			return true;
-			break;
-		}
-		else {
-			return false;
-			continue;
-		}
-		}
-		return false;
-	}
-};
-// animate
-void animation::animate () {	
-	     future<bool> animState = async(launch::async,
-			     		    &animation::checkState,
-					    this);
+// TODO: make the animation accept mp4 format as well
+typedef struct {
+	unsigned int frame;
+	vector<SDL_Texture*> images;	
+	string stateActivate;
+
+}animation_t;
+typedef struct {
+	string State;
+	vector<string> States;
+	entity2D entity;
+}animator_t;
+// NOTE: do not use this function under any circumstances as it will pause the game!
+void playanimation_interrupting (animator_t animator,animation_t animation) {
+while(animator.State == animation.stateActivate) // wait till the state is right to play the animation
+{
+for(auto & it : animation.images) {
+
+}
+} 
+
+}
+// Asynchronously play the animation
+void playAnimation () {
 }
