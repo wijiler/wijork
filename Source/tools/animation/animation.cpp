@@ -1,6 +1,7 @@
 #include"../../global.h"	
 #include"../entity.h"
-#include<bits/stdc++.h>
+#include<chrono>
+#include<thread>
 using namespace std;
 // TODO: make the animation accept mp4 format as well
 typedef struct {
@@ -15,19 +16,22 @@ typedef struct {
 	entity2D entity;
 }animator_t;
 // NOTE: do not use this function under any circumstances as it will pause the game!
-void playanimation_interrupting (animator_t animator,animation_t animation) {
-unsigned int frames = animation.images.size();
+void playanimation_interrupting (animator_t animator,animation_t animation,unsigned int fps) {
 unsigned int frame = 0;
+float time_f = (float)(animation.images.size()) / fps;
+chrono::seconds time{static_cast<long int>(time_f)};    // time it should take to play the animation 
 while(animator.State == animation.stateActivate) // wait till the state is right to play the animation
 {
-for(auto & it : animation.images) {
+for(auto & it : animation.images) {	
+	 this_thread::sleep_for(time);
 	 animator.entity.sprite = it;	
 	 frame++;
-	 if (frame >= frames) {
+	 if (frame >= animation.images.size()) {
 	     frame = 0;
 	     animator.entity.sprite = animation.images.front();
 	     continue;
-	 }
+	 }	
+	 
  }
 } 
 
@@ -35,3 +39,4 @@ for(auto & it : animation.images) {
 // Asynchronously play the animation
 void playAnimation () {
 }
+
