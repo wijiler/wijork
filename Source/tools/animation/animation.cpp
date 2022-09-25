@@ -23,9 +23,9 @@ chrono::seconds time{static_cast<long int>(time_f)};    // time it should take t
 while(animator.State == animation.stateActivate) // wait till the state is right to play the animation
 {
 for(auto & it : animation.images) {	
-	 this_thread::sleep_for(time);
 	 animator.entity.sprite = it;	
 	 frame++;
+	 this_thread::sleep_for(time);
 	 if (frame >= animation.images.size()) {
 	     frame = 0;
 	     animator.entity.sprite = animation.images.front();
