@@ -18,6 +18,7 @@ typedef struct {
 }animator_t;
 // NOTE: do not use this function under any circumstances as it will pause the game,also this code fucking sucks
 void playanimation_interrupting (animator_t animator,animation_t animation,unsigned int fps) {
+SDL_Texture* prevsprite = animator.entity.sprite;
 unsigned int frame = 0;
 float time_f = ((float)(animation.images.size()) / fps) / animation.images.size();
 chrono::seconds time{static_cast<long int>(time_f)};    // time it should take to play the animation 
@@ -35,7 +36,7 @@ for(auto & it : animation.images) {
 	 
  }
 } 
-
+animator.entity.sprite = prevsprite;
 }
 // Asynchronously play the animation
 void playAnimation (animator_t animator,animation_t animation,unsigned int fps) {

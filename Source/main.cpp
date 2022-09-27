@@ -1,5 +1,6 @@
 #include"global.h"
 #include"tools/entity.h"
+#include"tools/animation/animation.h"
 #include"tools/audio/audio.h"
 #include"tools/window.h"
 static const int width = 800;
@@ -22,6 +23,11 @@ int main (int argc, char **argv)
 /*  SDL_SetRenderDrawColor(renderer,255,0,0,255);
     SDL_SetWindowOpacity(window,1.0f);
 */
+           // Select the color for drawing. It is set to red here.
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+
+        // Clear the entire screen to our selected color.
+        SDL_RenderClear(renderer);
    // create sprites
     SDL_Surface * funnyman_surface = loadImage("funnyman.png");
     SDL_Texture * funnyman = createImageTexture(funnyman_surface,renderer);
@@ -32,6 +38,10 @@ int main (int argc, char **argv)
     player.height = 100;
     player.width = 100;
     int speed = 1;
+    animator_t player_animation; 
+    player_animation.entity = player;
+    player_animation.State = "idle";
+    animation_t player_running;
     // loop 
     bool running = true;
     SDL_Event event;
