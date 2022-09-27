@@ -36,6 +36,11 @@ int main (int argc, char **argv)
     player.sprite = funnyman;
     player.height = 128;
     player.width = 128;
+    animation_t run_anim;
+    run_anim.images = {"animation_run/pins2.png","animation_run/pins3.png","animation_run/pins4.png","animation_run/pins5.png"};
+    loadyoshit(run_anim,renderer);
+    animator_t player_animator;
+    player_animator.entity = player;
     /*animator_t player_animation; 
     player_animation.entity = player;
     player_animation.State = "idle";
@@ -55,6 +60,8 @@ int main (int argc, char **argv)
                 running = false;
             }
         }   
+    
+    playAnimation(player_animator,run_anim,4);
     SDL_RenderClear(renderer);
 //  SDL_RenderCopy(renderer, texture, NULL, NULL);
   drawImage(funnyman,renderer,0,12,100,100);
