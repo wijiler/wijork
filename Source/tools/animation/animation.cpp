@@ -5,44 +5,36 @@
 #include<future>
 using namespace std;
 // TODO: make the animation accept mp4 format as well
+string State;
 typedef struct {
-	vector<SDL_Texture*> images;	
-	//SDL_Texture* image;
+	vector<char*> images;	
 	string stateActivate;
 
 }animation_t;
 typedef struct {
-	string State;
-	vector<string> States;
 	entity2D entity;
 }animator_t;
 // NOTE: do not use this function under any circumstances as it will pause the game,also this code fucking sucks
-void playanimation_interrupting (animator_t animator,animation_t animation,unsigned int fps) {
+void playanimation_interrupting (animator_t animator,animation_t animation,unsigned int fps,SDL_Renderer* rend) {
 SDL_Texture* prevsprite = animator.entity.sprite;
 unsigned int frame = 0;
 float time_f = ((float)(animation.images.size()) / fps) / animation.images.size();
 chrono::seconds time{static_cast<long int>(time_f)};    // time it should take to play the animation 
-while(animator.State == animation.stateActivate) // wait till the state is right to play the animation
-{
-for(auto & it : animation.images) {	
-	 animator.entity.sprite = it;	
-	 frame++;
-	 this_thread::sleep_for(time);
-	 if (frame >= animation.images.size()) {
-	     frame = 0;
-	     animator.entity.sprite = animation.images.front();
-	     continue;
-	 }	
-	 
- }
-} 
+if (State == animation.stateActivate) {
+vector<SDL_Texture*> real_images;
+for(auto it = animation.images.begin(); it != animation.images.end(); ++it ){
+	 real_images.push_back(createImageTexture(loadImage(*it),rend)); 
+}
+}
+else {
 animator.entity.sprite = prevsprite;
 }
+}
 // Asynchronously play the animation
-void playAnimation (animator_t animator,animation_t animation,unsigned int fps) {
+void playAnimation (animator_t animator,animation_t animation,unsigned int fps,SDL_Renderer *rend) {
      future<void> anim = async(launch::async,
 		     	       playanimation_interrupting,
-			       animator,animation,fps);
+			       animator,animation,fps,rend);
      future_status status;
      while (true) {
 	     this_thread::sleep_for(chrono::milliseconds(22));

@@ -23,25 +23,26 @@ int main (int argc, char **argv)
 /*  SDL_SetRenderDrawColor(renderer,255,0,0,255);
     SDL_SetWindowOpacity(window,1.0f);
 */
-           // Select the color for drawing. It is set to red here.
         SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 
         // Clear the entire screen to our selected color.
         SDL_RenderClear(renderer);
    // create sprites
-    SDL_Surface * funnyman_surface = loadImage("funnyman.png");
-    SDL_Texture * funnyman = createImageTexture(funnyman_surface,renderer);
+    SDL_Surface * funnyman_surface = loadImage("pins_1.png");//,*f1 = loadImage("animation_run/pins2.png"),*f2 = loadImage("animation_run/pins3.png"),*f3 = loadImage("animation_run/pins4.png"),*f4 = loadImage("animation_run/pins5.png");
+    SDL_Texture * funnyman = createImageTexture(funnyman_surface,renderer);//,*pins1 = createImageTexture(f1,renderer),*pins2 = createImageTexture(f2,renderer),*pins3 = createImageTexture(f3,renderer),*pins4 = createImageTexture(f4,renderer);
     entity2D player;
     player.posx = 0;
     player.posy = 0;
     player.sprite = funnyman;
-    player.height = 100;
-    player.width = 100;
-    int speed = 1;
-    animator_t player_animation; 
+    player.height = 128;
+    player.width = 128;
+    /*animator_t player_animation; 
     player_animation.entity = player;
     player_animation.State = "idle";
     animation_t player_running;
+    player_running.images = { pins1,pins2,pins3,pins4 }; 
+    player_running.stateActivate = "running";
+    */
     // loop 
     bool running = true;
     SDL_Event event;
@@ -58,7 +59,7 @@ int main (int argc, char **argv)
 //  SDL_RenderCopy(renderer, texture, NULL, NULL);
   drawImage(funnyman,renderer,0,12,100,100);
     const Uint8* state = SDL_GetKeyboardState(NULL);
-    player.posy -= 0.5f;
+//    player.posy -= 0.5f;
     /*	  if( state[SDL_SCANCODE_W]) {
 		  player.posy += gravity(10.0f,-9.8,true) + speed;
     }
@@ -71,13 +72,19 @@ int main (int argc, char **argv)
    }
 */
    else if ( state[SDL_SCANCODE_A] ) {
-	   player.posx -= 1 + speed;
+	   player.posx -= 0.5f;
    }
    else if ( state[SDL_SCANCODE_D] ) {
-	   player.posx += 1 + speed;
+	   player.posx += 0.5f;
    }   
-   else if ( state[SDL_SCANCODE_SPACE] ) {
+  /* else if ( state[SDL_SCANCODE_SPACE] ) {
 	   player.posy += 3;
+   }*/
+   else if ( state[SDL_SCANCODE_W] ) {
+	   player.posy +=0.5f;
+   }
+   else if ( state[SDL_SCANCODE_S] ) {
+	   player.posy -= 0.5f;
    }
    else if ( state[SDL_SCANCODE_P] ) {
 	play_Audio("glados.mp3",false);
