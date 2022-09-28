@@ -1,6 +1,5 @@
 #include"global.h"
 #include"tools/entity.h"
-#include"tools/animation/animation.h"
 #include"tools/audio/audio.h"
 #include"tools/window.h"
 static const int width = 800;
@@ -28,26 +27,15 @@ int main (int argc, char **argv)
         // Clear the entire screen to our selected color.
         SDL_RenderClear(renderer);
    // create sprites
-    SDL_Surface * funnyman_surface = loadImage("pins_1.png");//,*f1 = loadImage("animation_run/pins2.png"),*f2 = loadImage("animation_run/pins3.png"),*f3 = loadImage("animation_run/pins4.png"),*f4 = loadImage("animation_run/pins5.png");
-    SDL_Texture * funnyman = createImageTexture(funnyman_surface,renderer);//,*pins1 = createImageTexture(f1,renderer),*pins2 = createImageTexture(f2,renderer),*pins3 = createImageTexture(f3,renderer),*pins4 = createImageTexture(f4,renderer);
+    SDL_Surface * funnyman_surface = loadImage("pins_1.png"),*f2 = loadImage("animation_run/pins2.png");
+    SDL_Texture * funnyman = createImageTexture(funnyman_surface,renderer),*pins2 = createImageTexture(f2,renderer);
+    
     entity2D player;
     player.posx = 0;
     player.posy = 0;
     player.sprite = funnyman;
     player.height = 128;
     player.width = 128;
-    animation_t run_anim;
-    run_anim.images = {"animation_run/pins2.png","animation_run/pins3.png","animation_run/pins4.png","animation_run/pins5.png"};
-    loadyoshit(run_anim,renderer);
-    animator_t player_animator;
-    player_animator.entity = player;
-    /*animator_t player_animation; 
-    player_animation.entity = player;
-    player_animation.State = "idle";
-    animation_t player_running;
-    player_running.images = { pins1,pins2,pins3,pins4 }; 
-    player_running.stateActivate = "running";
-    */
     // loop 
     bool running = true;
     SDL_Event event;
@@ -61,7 +49,6 @@ int main (int argc, char **argv)
             }
         }   
     
-    playAnimation(player_animator,run_anim,4);
     SDL_RenderClear(renderer);
 //  SDL_RenderCopy(renderer, texture, NULL, NULL);
   drawImage(funnyman,renderer,0,12,100,100);
@@ -80,6 +67,7 @@ int main (int argc, char **argv)
 */
    else if ( state[SDL_SCANCODE_A] ) {
 	   player.posx -= 0.5f;
+	   player.sprite = pins2;
    }
    else if ( state[SDL_SCANCODE_D] ) {
 	   player.posx += 0.5f;
